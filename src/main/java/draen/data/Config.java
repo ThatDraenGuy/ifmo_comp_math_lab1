@@ -1,6 +1,7 @@
-package draen.input;
+package draen.data;
 
-import draen.data.Range;
+import draen.input.MatrixInputManager;
+import draen.input.RandomInputManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +13,11 @@ public class Config {
 
     private int size = DEFAULT_SIZE;
     private MatrixInputManager matrixInputManager = DEFAULT_INPUT;
+
+
+    public String display() {
+        return
+                "Matrix size: " + size + ";\n"
+                + "Matrix input mode: " + matrixInputManager.getName() + ";\n";
+    }
 }

@@ -4,7 +4,7 @@ import draen.data.ControllerContext;
 
 public class GreetingsController implements Controller {
     @Override
-    public void handle(ControllerContext ctx, ControllerChain chain) {
+    public void handle(ControllerContext ctx) {
         ctx.getCommon().getIoManager().display(
                 """
                           __  __       _        _         _____       _                            \s

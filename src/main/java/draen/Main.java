@@ -1,8 +1,8 @@
 package draen;
 
-import draen.controllers.ControllerChain;
-import draen.controllers.GreetingsController;
-import draen.controllers.OptionsController;
+import draen.commands.impl.Auto;
+import draen.commands.impl.Go;
+import draen.controllers.*;
 import draen.data.CommonContext;
 import draen.commands.CommandsManager;
 import draen.commands.CommandsStorage;
@@ -12,7 +12,8 @@ import draen.commands.impl.input.ConsoleInput;
 import draen.commands.impl.input.FileInput;
 import draen.commands.impl.input.RandomInput;
 import draen.data.ControllerContext;
-import draen.input.Config;
+import draen.data.Config;
+import draen.data.Progress;
 import draen.input.ConsoleManager;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class Main {
         commandsStorage.addCommands(
                 new Help(),
                 new Size(),
+                new Auto(),
+                new Go(),
                 new ConsoleInput(),
                 new FileInput(),
                 new RandomInput()
@@ -32,6 +35,7 @@ public class Main {
                 commandsStorage,
                 new ConsoleManager(),
                 new Config(),
+                new Progress(),
                 args
         );
 
@@ -43,7 +47,9 @@ public class Main {
 
         ControllerChain controllerChain = new ControllerChain(controllerContext, List.of(
                 new GreetingsController(),
-                new OptionsController()
+                new OptionsController(),
+                new InteractionController(),
+                new CalculationController()
         ));
 
         controllerChain.doNext();

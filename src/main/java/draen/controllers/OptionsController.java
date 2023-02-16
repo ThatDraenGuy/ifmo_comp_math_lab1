@@ -12,11 +12,12 @@ import java.util.Iterator;
 
 public class OptionsController implements Controller {
     @Override
-    public void handle(ControllerContext ctx, ControllerChain chain) {
+    public void handle(ControllerContext ctx) {
         Iterator<String> iterator = Arrays.stream(ctx.getCommon().getArgs()).iterator();
         try {
             while (iterator.hasNext()) {
                 CommandData data = parseOption(ctx.getCommon(), iterator.next());
+                if (data==null) throw new OptionsException("Unknown option encountered");
                 CommandArgs args = CommandArgs.parseArgs(iterator, data.getArgsType());
                 ctx.getCommandsManager().execute(new CommandRequest(data.getName(), args));
             }
@@ -27,8 +28,6 @@ public class OptionsController implements Controller {
                             "\nProceed with caution - not all entered options were correctly handled."
             );
         }
-
-        chain.doNext();
     }
 
 
@@ -37,11 +36,11 @@ public class OptionsController implements Controller {
     private CommandData parseOption(CommonContext ctx, String option) throws OptionsException {
         if (option.startsWith("--")) {
             String name = option.substring(2);
-            return ctx.getCommandsStorage().getByName(name).getData();
+            return ctx.getCommandsStorage().getDataByName(name);
         }
         if (option.startsWith("-")) {
             char key = option.charAt(1);
-            return ctx.getCommandsStorage().getByKey(key).getData();
+            return ctx.getCommandsStorage().getDataByKey(key);
         }
         throw new OptionsException("Invalid parameter encountered: " + option);
     }

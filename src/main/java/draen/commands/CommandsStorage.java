@@ -26,6 +26,16 @@ public class CommandsStorage {
     public Command getByKey(char key) {
         return commandsByKey.get(key);
     }
+    public CommandData getDataByName(String name) {
+        Command command = commandsByName.get(name);
+        if (command == null) return null;
+        return command.getData();
+    }
+    public CommandData getDataByKey(char key) {
+        Command command = commandsByKey.get(key);
+        if (command == null) return null;
+        return command.getData();
+    }
 
     public Collection<Command> getCommands() {
         return commandsByName.values();

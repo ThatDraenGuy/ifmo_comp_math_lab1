@@ -6,7 +6,7 @@ import draen.data.CommonContext;
 public class Help extends AbstractCommand {
     public Help() {
         super(new CommandData("help", 'h', "Displays all commands and their descriptions",
-                ArgsType.NONE));
+                ArgsType.NONE, CommandType.BOTH));
     }
 
     @Override
@@ -18,9 +18,11 @@ public class Help extends AbstractCommand {
 
     private String displayCmd(Command cmd) {
         CommandData data = cmd.getData();
+        if (data.getCommandType().equals(CommandType.NONE)) return "";
         return data.getName() +
                 " (-" + data.getKey() + ")" +
-                data.getArgsType().display() + ": " +
+                data.getArgsType().display() +
+                data.getCommandType().display() + ": " +
                 data.getDescription() + "\n";
     }
 }

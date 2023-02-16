@@ -10,4 +10,5 @@ public class CommandData {
     private final char key;
     private final String description;
     private final ArgsType argsType;
+    private final CommandType commandType;
 }

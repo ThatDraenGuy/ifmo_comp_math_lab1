@@ -14,9 +14,8 @@ public class ControllerChain {
     }
 
     public void doNext() {
-        try {
-            controllers.remove().handle(context, this);
-        } catch (NoSuchElementException ignored) {
+        while (!controllers.isEmpty()) {
+            controllers.remove().handle(context);
         }
     }
 }

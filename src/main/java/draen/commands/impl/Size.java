@@ -1,14 +1,12 @@
 package draen.commands.impl;
 
-import draen.commands.AbstractCommand;
-import draen.commands.ArgsType;
-import draen.commands.CommandArgs;
-import draen.commands.CommandData;
+import draen.commands.*;
 import draen.data.CommonContext;
 
 public class Size extends AbstractCommand {
     public Size() {
-        super(new CommandData("size", 's', "Sets size of the matrix", ArgsType.NUM));
+        super(new CommandData("size", 's', "Sets size of the matrix",
+                ArgsType.NUM, CommandType.BOTH));
     }
 
     @Override

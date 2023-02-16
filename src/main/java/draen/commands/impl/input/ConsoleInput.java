@@ -1,15 +1,13 @@
 package draen.commands.impl.input;
 
+import draen.commands.*;
 import draen.data.CommonContext;
-import draen.commands.AbstractCommand;
-import draen.commands.ArgsType;
-import draen.commands.CommandArgs;
-import draen.commands.CommandData;
 
 public class ConsoleInput extends AbstractCommand {
     public ConsoleInput() {
         super(new CommandData("console", 'c',
-                "Configures matrix draen.input to be read form manual draen.input", ArgsType.NONE));
+                "Configures matrix input to be read from manual input",
+                ArgsType.NONE, CommandType.BOTH));
     }
 
     @Override
