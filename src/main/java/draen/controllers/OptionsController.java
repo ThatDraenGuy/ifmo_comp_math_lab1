@@ -3,8 +3,8 @@ package draen.controllers;
 import draen.commands.CommandArgs;
 import draen.commands.CommandData;
 import draen.commands.CommandRequest;
-import draen.data.CommonContext;
-import draen.data.ControllerContext;
+import draen.data.context.CommonContext;
+import draen.data.context.ControllerContext;
 import draen.exceptions.OptionsException;
 
 import java.util.Arrays;
@@ -22,7 +22,7 @@ public class OptionsController implements Controller {
                 ctx.getCommandsManager().execute(new CommandRequest(data.getName(), args));
             }
         } catch (Exception e) {
-            ctx.getCommon().getIoManager().display(
+            ctx.getCommon().getIoManager().println(
                     "Error encountered while parsing application options: \n" +
                             e.getMessage() +
                             "\nProceed with caution - not all entered options were correctly handled."

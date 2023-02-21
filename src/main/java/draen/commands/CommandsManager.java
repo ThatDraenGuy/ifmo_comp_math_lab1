@@ -1,6 +1,6 @@
 package draen.commands;
 
-import draen.data.CommonContext;
+import draen.data.context.CommonContext;
 import draen.exceptions.ArgsTypeException;
 import lombok.AllArgsConstructor;
 

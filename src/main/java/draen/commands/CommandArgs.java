@@ -1,6 +1,6 @@
 package draen.commands;
 
-import draen.data.Range;
+import draen.data.transfer.Range;
 import draen.exceptions.ArgsParseException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,38 +13,53 @@ import java.util.NoSuchElementException;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CommandArgs {
-    private final Integer num;
+    private final Integer numInt;
+    private final Double numDouble;
     private final File file;
     private final Range range;
     private final ArgsType type;
 
     public static CommandArgs none() {
-        return new CommandArgs(null, null, null, ArgsType.NONE);
+        return new CommandArgs(null, null, null, null, ArgsType.NONE);
     }
 
-    public static CommandArgs num(int num) {
-        return new CommandArgs(num, null, null, ArgsType.NUM);
+    public static CommandArgs numInt(int num) {
+        return new CommandArgs(num, null, null, null, ArgsType.INT);
+    }
+
+    public static CommandArgs numDouble(double num) {
+        return new CommandArgs(null, num, null, null, ArgsType.DOUBLE);
     }
 
     public static CommandArgs file(File file) {
-        return new CommandArgs(null, file, null, ArgsType.FILE);
+        return new CommandArgs(null, null, file, null, ArgsType.FILE);
     }
 
     public static CommandArgs range(Range range) {
-        return new CommandArgs(null, null, range, ArgsType.RANGE);
+        return new CommandArgs(null, null, null, range, ArgsType.RANGE);
     }
 
     public static CommandArgs parseArgs(Iterator<String> params, ArgsType argsType) throws ArgsParseException {
         try {
             return switch (argsType) {
                 case NONE -> CommandArgs.none();
-                case NUM -> {
+                case INT -> {
                     String arg = params.next();
                     try {
-                        yield CommandArgs.num(Integer.parseInt(arg));
+                        yield CommandArgs.numInt(Integer.parseInt(arg));
                     } catch (NumberFormatException e) {
                         throw new ArgsParseException(
                                 "Invalid argument encountered: expected an int, but got a '" + arg + "' instead"
+                        );
+                    }
+                }
+                case DOUBLE -> {
+                    String arg = params.next();
+                    try {
+                        yield CommandArgs.numDouble(Double.parseDouble(arg));
+                    } catch (NumberFormatException e) {
+                        throw new ArgsParseException(
+                                "Invalid argument encountered: expected a double, but got a '" + arg + "' instead"
                         );
                     }
                 }

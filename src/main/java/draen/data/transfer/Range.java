@@ -1,4 +1,4 @@
-package draen.data;
+package draen.data.transfer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

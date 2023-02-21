@@ -1,6 +1,6 @@
 package draen.commands;
 
-import draen.data.CommonContext;
+import draen.data.context.CommonContext;
 
 public interface Command {
     void execute(CommandArgs args, CommonContext context);

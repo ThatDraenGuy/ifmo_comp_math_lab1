@@ -1,4 +1,4 @@
-package draen.data;
+package draen.data.context;
 
 import draen.commands.CommandsManager;
 import lombok.AllArgsConstructor;

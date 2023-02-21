@@ -1,11 +1,11 @@
 package draen.controllers;
 
-import draen.data.ControllerContext;
+import draen.data.context.ControllerContext;
 
 public class GreetingsController implements Controller {
     @Override
     public void handle(ControllerContext ctx) {
-        ctx.getCommon().getIoManager().display(
+        ctx.getCommon().getIoManager().println(
                 """
                           __  __       _        _         _____       _                            \s
                          |  \\/  |     | |      (_)       / ____|     | |                           \s

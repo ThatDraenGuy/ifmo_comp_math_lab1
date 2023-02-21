@@ -1,7 +1,8 @@
 package draen.commands.impl.input;
 
 import draen.commands.*;
-import draen.data.CommonContext;
+import draen.data.context.CommonContext;
+import draen.input.ConsoleInputManager;
 
 public class ConsoleInput extends AbstractCommand {
     public ConsoleInput() {
@@ -12,6 +13,6 @@ public class ConsoleInput extends AbstractCommand {
 
     @Override
     public void execute(CommandArgs args, CommonContext context) {
-        context.getConfig().setMatrixInputManager(context.getIoManager());
+        context.getConfig().setMatrixInputManager(new ConsoleInputManager());
     }
 }

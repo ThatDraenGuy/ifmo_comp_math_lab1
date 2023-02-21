@@ -1,7 +1,7 @@
 package draen.commands.impl;
 
 import draen.commands.*;
-import draen.data.CommonContext;
+import draen.data.context.CommonContext;
 
 public class Go extends AbstractCommand {
     public Go() {

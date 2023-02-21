@@ -3,8 +3,8 @@ package draen.controllers;
 import draen.commands.CommandArgs;
 import draen.commands.CommandData;
 import draen.commands.CommandRequest;
-import draen.data.ControllerContext;
-import draen.data.Progress;
+import draen.data.context.ControllerContext;
+import draen.data.application.Progress;
 import draen.exceptions.ArgsParseException;
 import draen.exceptions.ArgsTypeException;
 import draen.exceptions.OptionsException;
@@ -20,7 +20,7 @@ public class InteractionController implements Controller {
         IOManager ioManager = ctx.getCommon().getIoManager();
 
         if (progress.isAuto()) return;
-        ioManager.display(
+        ioManager.println(
                 """
                         Welcome to Matrix Solver (real name TBA)!
                         You are currently in the interaction mode.
@@ -29,7 +29,7 @@ public class InteractionController implements Controller {
                         Current configuration:
                         """
         );
-        ioManager.display(ctx.getCommon().getConfig().display());
+        ioManager.println(ctx.getCommon().getConfig().display());
 
         while (! ctx.getCommon().getProgress().isStart()) {
             try {
@@ -37,7 +37,7 @@ public class InteractionController implements Controller {
                 CommandRequest request = parseInput(ctx, input);
                 ctx.getCommandsManager().execute(request);
             } catch (ArgsParseException | OptionsException | ArgsTypeException e) {
-                ioManager.display(e.getMessage());
+                ioManager.println(e.getMessage());
             }
 
         }

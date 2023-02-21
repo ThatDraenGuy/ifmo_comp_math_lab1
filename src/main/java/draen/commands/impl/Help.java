@@ -1,7 +1,7 @@
 package draen.commands.impl;
 
 import draen.commands.*;
-import draen.data.CommonContext;
+import draen.data.context.CommonContext;
 
 public class Help extends AbstractCommand {
     public Help() {
@@ -12,7 +12,7 @@ public class Help extends AbstractCommand {
     @Override
     public void execute(CommandArgs args, CommonContext context) {
         context.getCommandsStorage().getCommands().forEach(
-                cmd -> context.getIoManager().display(displayCmd(cmd))
+                cmd -> context.getIoManager().println(displayCmd(cmd))
         );
     }
 

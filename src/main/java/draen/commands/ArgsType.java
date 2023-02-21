@@ -2,7 +2,8 @@ package draen.commands;
 
 public enum ArgsType {
     NONE,
-    NUM,
+    INT,
+    DOUBLE,
     FILE,
     RANGE;
 
@@ -10,7 +11,8 @@ public enum ArgsType {
     public String display() {
         return switch (this) {
             case NONE -> "";
-            case NUM -> "<number>";
+            case INT -> "<int>";
+            case DOUBLE -> "<double>";
             case FILE -> "<file name>";
             case RANGE -> "<min number> <max number>";
         };

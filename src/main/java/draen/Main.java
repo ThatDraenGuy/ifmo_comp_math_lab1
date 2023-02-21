@@ -1,19 +1,16 @@
 package draen;
 
-import draen.commands.impl.Auto;
-import draen.commands.impl.Go;
+import draen.commands.impl.*;
 import draen.controllers.*;
-import draen.data.CommonContext;
+import draen.data.context.CommonContext;
 import draen.commands.CommandsManager;
 import draen.commands.CommandsStorage;
-import draen.commands.impl.Help;
-import draen.commands.impl.Size;
 import draen.commands.impl.input.ConsoleInput;
 import draen.commands.impl.input.FileInput;
 import draen.commands.impl.input.RandomInput;
-import draen.data.ControllerContext;
-import draen.data.Config;
-import draen.data.Progress;
+import draen.data.context.ControllerContext;
+import draen.data.application.Config;
+import draen.data.application.Progress;
 import draen.input.ConsoleManager;
 
 import java.util.List;
@@ -24,6 +21,7 @@ public class Main {
         commandsStorage.addCommands(
                 new Help(),
                 new Size(),
+                new Precision(),
                 new Auto(),
                 new Go(),
                 new ConsoleInput(),
