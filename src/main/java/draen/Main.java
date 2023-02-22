@@ -22,6 +22,7 @@ public class Main {
                 new Help(),
                 new Size(),
                 new Precision(),
+                new DisplayConfig(),
                 new Auto(),
                 new Go(),
                 new ConsoleInput(),
