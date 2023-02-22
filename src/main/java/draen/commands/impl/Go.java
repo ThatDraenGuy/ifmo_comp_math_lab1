@@ -10,7 +10,8 @@ public class Go extends AbstractCommand {
     }
 
     @Override
-    public void execute(CommandArgs args, CommonContext context) {
+    public ExecutionResult execute(CommandArgs args, CommonContext context) {
         context.getProgress().setStart(true);
+        return new ExecutionResult(true, "Starting calculation...");
     }
 }

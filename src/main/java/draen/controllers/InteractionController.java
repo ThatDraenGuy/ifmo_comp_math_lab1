@@ -3,6 +3,7 @@ package draen.controllers;
 import draen.commands.CommandArgs;
 import draen.commands.CommandData;
 import draen.commands.CommandRequest;
+import draen.commands.ExecutionResult;
 import draen.data.context.ControllerContext;
 import draen.data.application.Progress;
 import draen.exceptions.ArgsParseException;
@@ -35,7 +36,8 @@ public class InteractionController implements Controller {
             try {
                 String input = ioManager.readLine();
                 CommandRequest request = parseInput(ctx, input);
-                ctx.getCommandsManager().execute(request);
+                ExecutionResult executionResult = ctx.getCommandsManager().execute(request);
+                handleExecutionResult(ioManager, executionResult);
             } catch (ArgsParseException | OptionsException | ArgsTypeException e) {
                 ioManager.println(e.getMessage());
             }
@@ -54,5 +56,13 @@ public class InteractionController implements Controller {
         Iterator<String> iterator = Arrays.stream(strings).skip(1).iterator();
         CommandArgs args = CommandArgs.parseArgs(iterator, data.getArgsType());
         return new CommandRequest(name, args);
+    }
+
+    private void handleExecutionResult(IOManager ioManager, ExecutionResult executionResult) {
+        if (executionResult.isSuccess()) {
+            ioManager.println(executionResult.getMessage());
+        } else {
+            ioManager.displayError(executionResult.getMessage());
+        }
     }
 }

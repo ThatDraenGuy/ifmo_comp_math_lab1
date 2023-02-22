@@ -11,7 +11,8 @@ public class Auto extends AbstractCommand {
     }
 
     @Override
-    public void execute(CommandArgs args, CommonContext context) {
+    public ExecutionResult execute(CommandArgs args, CommonContext context) {
         context.getProgress().setAuto(true);
+        return new ExecutionResult(true, "Starting calculation...");
     }
 }

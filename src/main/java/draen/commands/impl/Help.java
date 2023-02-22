@@ -10,10 +10,11 @@ public class Help extends AbstractCommand {
     }
 
     @Override
-    public void execute(CommandArgs args, CommonContext context) {
+    public ExecutionResult execute(CommandArgs args, CommonContext context) {
         context.getCommandsStorage().getCommands().forEach(
                 cmd -> context.getIoManager().println(displayCmd(cmd))
         );
+        return new ExecutionResult(true, "All commands displayed.");
     }
 
     private String displayCmd(Command cmd) {

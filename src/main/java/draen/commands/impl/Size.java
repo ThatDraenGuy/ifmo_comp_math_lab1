@@ -10,7 +10,8 @@ public class Size extends AbstractCommand {
     }
 
     @Override
-    public void execute(CommandArgs args, CommonContext context) {
+    public ExecutionResult execute(CommandArgs args, CommonContext context) {
         context.getConfig().setSize(args.getNumInt());
+        return new ExecutionResult(true, "Matrix size set to " + args.getNumInt());
     }
 }

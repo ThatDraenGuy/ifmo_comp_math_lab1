@@ -12,7 +12,8 @@ public class ConsoleInput extends AbstractCommand {
     }
 
     @Override
-    public void execute(CommandArgs args, CommonContext context) {
+    public ExecutionResult execute(CommandArgs args, CommonContext context) {
         context.getConfig().setMatrixInputManager(new ConsoleInputManager());
+        return new ExecutionResult(true, "Matrix input mode set to 'console'");
     }
 }
