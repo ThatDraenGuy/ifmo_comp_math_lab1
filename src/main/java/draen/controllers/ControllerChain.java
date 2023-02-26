@@ -13,7 +13,7 @@ public class ControllerChain {
         this.controllers = new LinkedList<>(controllers);
     }
 
-    public void doNext() {
+    public void begin() {
         while (!controllers.isEmpty()) {
             controllers.remove().handle(context);
         }

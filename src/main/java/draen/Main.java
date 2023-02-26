@@ -48,9 +48,10 @@ public class Main {
                 new GreetingsController(),
                 new OptionsController(),
                 new InteractionController(),
-                new CalculationController()
+                new CalculationController(),
+                new FarewellController()
         ));
 
-        controllerChain.doNext();
+        controllerChain.begin();
     }
 }
