@@ -38,8 +38,8 @@ public class InteractionController implements Controller {
                 CommandRequest request = parseInput(ctx, input);
                 ExecutionResult executionResult = ctx.getCommandsManager().execute(request);
                 handleExecutionResult(ioManager, executionResult);
-            } catch (ArgsParseException | OptionsException | ArgsTypeException e) {
-                ioManager.println(e.getMessage());
+            } catch (Exception e) {
+                ioManager.displayError(e);
             }
 
         }

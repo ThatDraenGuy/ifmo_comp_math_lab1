@@ -166,7 +166,12 @@ public class Matrix {
             return new Extended(newBase, newResult);
         }
 
-        public Extended prepareForIteration() {
+        public Extended prepareForIteration() throws AlgebraException {
+            for (int i = 0; i < base.height(); i++) {
+                if (base.data[i][i] == 0)
+                    throw new AlgebraException("Matrix is invalid and cannot be solved using this method");
+            }
+
             Matrix newBase = new Matrix(base.width(), base.height());
             Matrix newResult = new Matrix(result.width(), result.height());
 

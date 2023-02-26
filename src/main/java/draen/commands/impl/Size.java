@@ -11,6 +11,7 @@ public class Size extends AbstractCommand {
 
     @Override
     public ExecutionResult execute(CommandArgs args, CommonContext context) {
+        if (args.getNumInt() < 2) return new ExecutionResult(false, "Invalid matrix size!");
         context.getConfig().setSize(args.getNumInt());
         return new ExecutionResult(true, "Matrix size set to " + args.getNumInt());
     }

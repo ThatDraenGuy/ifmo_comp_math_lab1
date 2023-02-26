@@ -8,6 +8,8 @@ import draen.exceptions.AlgebraException;
 import draen.exceptions.EquationInputException;
 import draen.input.IOManager;
 
+import java.time.Instant;
+
 public class CalculationController implements Controller {
     @Override
     public void handle(ControllerContext ctx) {

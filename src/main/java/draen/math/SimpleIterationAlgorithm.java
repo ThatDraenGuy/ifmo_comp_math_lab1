@@ -4,6 +4,9 @@ import draen.data.transfer.Equation;
 import draen.data.transfer.Solution;
 import draen.exceptions.AlgebraException;
 
+import java.time.Duration;
+import java.time.Instant;
+
 
 public class SimpleIterationAlgorithm implements IterationAlgorithm {
     public static long MAX_STEP_AMOUNT = 1000;
@@ -14,6 +17,7 @@ public class SimpleIterationAlgorithm implements IterationAlgorithm {
 
     @Override
     public Solution solve(Equation equation, double precision) throws AlgebraException {
+        Instant startTime = Instant.now();
         Matrix.Extended extendedMatrix = Matrix.Extended.fromEquation(equation);
 
         if (! extendedMatrix.getBase().isDiagonalDominating()) {
@@ -26,12 +30,14 @@ public class SimpleIterationAlgorithm implements IterationAlgorithm {
         Matrix x = b.getCopy();
 
         long stepAmount = getStepAmount(precision, a, b, x);
+        if (stepAmount < 1) throw new AlgebraException("Matrix is invalid and cannot be solved using this method");
         if (stepAmount > MAX_STEP_AMOUNT) throw new AlgebraException("Cannot handle such precision");
         double actualPrecision = getActualPrecision(stepAmount, a, b, x);
         for (long i = 0; i < stepAmount; i++) {
             x = iter(a, b, x);
         }
-        return new Solution(x, stepAmount, new Matrix(x.width(), x.height(), actualPrecision));
+        return new Solution(x, new Matrix(x.width(), x.height(), actualPrecision),
+                stepAmount, Duration.between(startTime, Instant.now()));
     }
 
     private long getStepAmount(double precision, Matrix a, Matrix b, Matrix x) {

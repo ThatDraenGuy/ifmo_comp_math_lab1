@@ -19,8 +19,7 @@ public class ConsoleManager implements IOManager {
    }
     @Override
     public void displayError(String str) {
-        System.out.println("Exception occurred:");
-        System.out.println(str);
+        System.out.println("Error: " + str);
     }
 
     @Override

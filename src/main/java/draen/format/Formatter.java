@@ -16,11 +16,11 @@ public class Formatter {
 
 
     public static void setPrecision(double precision) {
-        if (precision <= 0.0000001) throw new IllegalArgumentException();
+        if (precision <= 0.0000001) throw new IllegalArgumentException("Cannot work with precision like this!");
         if (precision >= 1) {
             exactDecimalFormat.applyPattern("0");
         } else {
-            exactDecimalFormat.applyPattern("0." + "#".repeat(getDigitsNum(precision) + 1));
+            exactDecimalFormat.applyPattern("0." + "#".repeat(getDigitsNum(precision)));
         }
 
     }
