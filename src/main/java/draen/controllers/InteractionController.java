@@ -27,8 +27,8 @@ public class InteractionController implements Controller {
                         You are currently in the interaction mode.
                         Type 'help' to see your options.
                         Type 'go' to begin calculation.
-                        Current configuration:
-                        """
+                        
+                        Current configuration:"""
         );
         ioManager.println(ctx.getCommon().getConfig().display());
 
