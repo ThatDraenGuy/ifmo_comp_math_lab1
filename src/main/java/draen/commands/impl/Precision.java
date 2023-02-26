@@ -7,7 +7,7 @@ import draen.format.Formatter;
 public class Precision extends AbstractCommand {
     public Precision() {
         super(new CommandData("precision", 'p', "Sets desired precision",
-                ArgsType.INT, CommandType.BOTH));
+                ArgsType.DOUBLE, CommandType.BOTH));
     }
 
     @Override
