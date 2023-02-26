@@ -31,6 +31,10 @@ public class Matrix {
         forAllIndexes((i, j) -> data[i][j] = value.apply(i, j));
     }
 
+    public Matrix(double[][] data) {
+        this.data = data;
+    }
+
     public int height() {
         return data.length;
     }
@@ -52,7 +56,7 @@ public class Matrix {
 
     public String display() {
         StringBuilder builder = new StringBuilder();
-        forEachRow().forEach(row -> {
+        allRows().forEach(row -> {
             for (double val : row) {
                 builder.append(Formatter.format(val)).append(' ');
             }
@@ -103,7 +107,7 @@ public class Matrix {
                 .sum();
     }
 
-    private Stream<double[]> forEachRow() {
+    private Stream<double[]> allRows() {
         return Arrays.stream(data, 0, height());
     }
 

@@ -5,6 +5,7 @@ import draen.data.context.ControllerContext;
 import draen.data.transfer.Equation;
 import draen.data.transfer.Solution;
 import draen.exceptions.AlgebraException;
+import draen.exceptions.EquationInputException;
 import draen.input.IOManager;
 
 public class CalculationController implements Controller {
@@ -13,12 +14,12 @@ public class CalculationController implements Controller {
         IOManager ioManager = ctx.getCommon().getIoManager();
         ioManager.println("Reading matrix...");
         Config config = ctx.getCommon().getConfig();
-        Equation equation = config.getMatrixInputManager().readEquation(config);
-        ioManager.println("Matrix read, calculating...");
         try {
+            Equation equation = config.getMatrixInputManager().readEquation(config);
+            ioManager.println("Matrix read, calculating...");
             Solution solution = config.getIterationAlgorithm().solve(equation, config.getPrecision());
             ioManager.println(solution.display());
-        } catch (AlgebraException e) {
+        } catch (AlgebraException | EquationInputException e) {
             ioManager.displayError(e);
         }
     }
