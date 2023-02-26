@@ -20,7 +20,7 @@ public class SimpleIterationAlgorithm implements IterationAlgorithm {
             extendedMatrix = extendedMatrix.getWithDiagonalDominating();
         }
 
-        extendedMatrix = extendedMatrix.forIteration();
+        extendedMatrix = extendedMatrix.prepareForIteration();
         Matrix a = extendedMatrix.getBase();
         Matrix b = extendedMatrix.getResult();
         Matrix x = b.getCopy();
