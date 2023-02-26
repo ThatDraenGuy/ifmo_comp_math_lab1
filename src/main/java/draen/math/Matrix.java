@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -55,10 +56,18 @@ public class Matrix {
     }
 
     public String display() {
+        return applyDisplayTemplate(Formatter::format);
+    }
+
+    public String displayExact() {
+        return applyDisplayTemplate(Formatter::formatExact);
+    }
+
+    private String applyDisplayTemplate(Function<Double, String> displayFunction) {
         StringBuilder builder = new StringBuilder();
         allRows().forEach(row -> {
             for (double val : row) {
-                builder.append(Formatter.format(val)).append(' ');
+                builder.append(displayFunction.apply(val)).append('\t');
             }
             builder.append('\n');
         });

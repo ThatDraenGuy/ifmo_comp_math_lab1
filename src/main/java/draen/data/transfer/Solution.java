@@ -14,7 +14,7 @@ public class Solution {
     public String display() {
         return "Solution: \n" +
                 "- number of iterations: " + stepAmount +"\n" +
-                "- X: \n" + result.display() +
-                "- error: \n" + error.display();
+                "- X: \n" + result.displayExact() +
+                "- error: \n" + error.displayExact();
     }
 }

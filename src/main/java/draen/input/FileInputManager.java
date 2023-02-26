@@ -46,9 +46,10 @@ public class FileInputManager implements MatrixInputManager {
         int currentY = 0;
         while (source.hasNext()) {
             String line = source.next();
-            String[] elements = line.split("\s+");
+            String[] elements = line.split("\\s+");
             if (elements.length != size + 1)
-                throw new EquationInputException("Incorrect number of elements in matrix!");
+                throw new EquationInputException(
+                        "Incorrect number of elements in row! Expected: " + (size+1) + "; got: " + elements.length);
             for (int i = 0; i < size; i++) {
                 base[currentY][i] = Double.parseDouble(elements[i]);
             }

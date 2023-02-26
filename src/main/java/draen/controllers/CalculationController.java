@@ -16,7 +16,9 @@ public class CalculationController implements Controller {
         Config config = ctx.getCommon().getConfig();
         try {
             Equation equation = config.getMatrixInputManager().readEquation(config);
-            ioManager.println("Matrix read, calculating...");
+            ioManager.println("Inputted matrix:");
+            ioManager.println(equation.display());
+            ioManager.println("Calculating...");
             Solution solution = config.getIterationAlgorithm().solve(equation, config.getPrecision());
             ioManager.println(solution.display());
         } catch (AlgebraException | EquationInputException e) {
