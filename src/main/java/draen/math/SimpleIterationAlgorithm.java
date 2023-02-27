@@ -9,9 +9,9 @@ import java.time.Instant;
 
 
 public class SimpleIterationAlgorithm implements IterationAlgorithm {
-    public static long MAX_STEP_AMOUNT = 1000;
+    public static long MAX_STEP_AMOUNT = 100000;
 
-    private Matrix iter(Matrix a, Matrix b, Matrix x) throws AlgebraException {
+    private Matrix iterate(Matrix a, Matrix b, Matrix x) throws AlgebraException {
         return a.mul(x).add(b);
     }
 
@@ -32,11 +32,12 @@ public class SimpleIterationAlgorithm implements IterationAlgorithm {
         long stepAmount = getStepAmount(precision, a, b, x);
         if (stepAmount < 1) throw new AlgebraException("Matrix is invalid and cannot be solved using this method");
         if (stepAmount > MAX_STEP_AMOUNT) throw new AlgebraException("Cannot handle such precision");
-        double actualPrecision = getActualPrecision(stepAmount, a, b, x);
+        double estimatePrecision = getPrecisionEstimate(stepAmount, a, b, x);
         for (long i = 0; i < stepAmount; i++) {
-            x = iter(a, b, x);
+            x = iterate(a, b, x);
         }
-        return new Solution(x, new Matrix(x.width(), x.height(), actualPrecision),
+        Matrix actualPrecisionMatrix = getActualPrecision(equation, x);
+        return new Solution(x, estimatePrecision, actualPrecisionMatrix,
                 stepAmount, Duration.between(startTime, Instant.now()));
     }
 
@@ -49,11 +50,16 @@ public class SimpleIterationAlgorithm implements IterationAlgorithm {
         return Math.round(k) + 1;
     }
 
-    private double getActualPrecision(long stepAmount, Matrix a, Matrix b, Matrix x) {
+    private double getPrecisionEstimate(long stepAmount, Matrix a, Matrix b, Matrix x) {
         double normA = a.norm();
         double normB = b.norm();
         double normX = x.norm();
 
         return Math.pow(normA, stepAmount) * ( normX + normB / ( 1 - normA ) );
+    }
+
+    private Matrix getActualPrecision(Equation equation, Matrix solution) throws AlgebraException {
+        Matrix result = equation.getA().mul(solution);
+        return equation.getB().getDifference(result);
     }
 }

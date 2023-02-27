@@ -5,10 +5,14 @@ import java.text.DecimalFormat;
 
 public class Formatter {
     private final static DecimalFormat decimalFormat = new DecimalFormat("0.###");
-    private static final DecimalFormat exactDecimalFormat = new DecimalFormat("0.##");
+    private static final DecimalFormat withPrecisionDecimalFormat = new DecimalFormat("0.##");
+    private static final DecimalFormat exactDecimalFormat = new DecimalFormat("0.###E0");
 
-    public static String format(double num) {
+    public static String formatDefault(double num) {
         return decimalFormat.format(num);
+    }
+    public static String formatWithPrecision(double num) {
+        return withPrecisionDecimalFormat.format(num);
     }
     public static String formatExact(double num) {
         return exactDecimalFormat.format(num);
@@ -18,9 +22,9 @@ public class Formatter {
     public static void setPrecision(double precision) {
         if (precision <= 0.0000001) throw new IllegalArgumentException("Cannot work with precision like this!");
         if (precision >= 1) {
-            exactDecimalFormat.applyPattern("0");
+            withPrecisionDecimalFormat.applyPattern("0");
         } else {
-            exactDecimalFormat.applyPattern("0." + "#".repeat(getDigitsNum(precision)));
+            withPrecisionDecimalFormat.applyPattern("0." + "#".repeat(getDigitsNum(precision)));
         }
 
     }

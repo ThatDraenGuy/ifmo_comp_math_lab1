@@ -56,7 +56,11 @@ public class Matrix {
     }
 
     public String display() {
-        return applyDisplayTemplate(Formatter::format);
+        return applyDisplayTemplate(Formatter::formatDefault);
+    }
+
+    public String displayWithPrecision() {
+        return applyDisplayTemplate(Formatter::formatWithPrecision);
     }
 
     public String displayExact() {
@@ -87,6 +91,17 @@ public class Matrix {
             if (sum > maxSum) maxSum = sum;
         }
         return maxSum;
+    }
+
+    public Matrix getDifference(Matrix other) throws AlgebraException {
+        if (this.height() != other.height() || this.width() != other.width()) {
+            throw new AlgebraException("Size mismatch");
+        }
+        Matrix res = new Matrix(width(), height());
+        res.forAllIndexes((i, j) ->
+                res.data[i][j] = abs(this.data[i][j] - other.data[i][j]) / this.data[i][j]
+        );
+        return res;
     }
 
     public Matrix add(Matrix other) throws AlgebraException {

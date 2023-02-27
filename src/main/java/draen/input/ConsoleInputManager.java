@@ -36,7 +36,7 @@ public class ConsoleInputManager extends ConsoleManager implements MatrixInputMa
             String input = readLine();
             try {
                 double val = Double.parseDouble(input);
-                current[currentY][currentX] = Formatter.format(val) + "\t";
+                current[currentY][currentX] = Formatter.formatDefault(val) + "\t";
                 return val;
             } catch (NumberFormatException e) {
                 displayError("Couldn't parse double from '" + input +"'. Please try again:");

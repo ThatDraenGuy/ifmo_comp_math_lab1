@@ -14,6 +14,6 @@ public class Precision extends AbstractCommand {
     public ExecutionResult execute(CommandArgs args, CommonContext context) {
         Formatter.setPrecision(args.getNumDouble());
         context.getConfig().setPrecision(args.getNumDouble());
-        return new ExecutionResult(true, "Precision set to " + Formatter.formatExact(args.getNumDouble()));
+        return new ExecutionResult(true, "Precision set to " + Formatter.formatWithPrecision(args.getNumDouble()));
     }
 }

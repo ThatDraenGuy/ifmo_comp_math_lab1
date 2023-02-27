@@ -1,5 +1,6 @@
 package draen.data.transfer;
 
+import draen.format.Formatter;
 import draen.math.Matrix;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,8 @@ import java.time.Duration;
 @AllArgsConstructor
 public class Solution {
     private final Matrix result;
-    private final Matrix error;
+    private final double estimatePrecision;
+    private final Matrix actualPrecision;
     private final long stepAmount;
     private final Duration duration;
 
@@ -18,7 +20,8 @@ public class Solution {
         return "Solution: \n" +
                 "- duration: " + duration.toNanos() / 1000 +"μs\n" +
                 "- number of iterations: " + stepAmount +"\n" +
-                "- X: \n" + result.displayExact() +
-                "- error: \n" + error.displayExact();
+                "- X: \n" + result.displayWithPrecision() +
+                "- estimate precision: " + Formatter.formatExact(estimatePrecision) + "\n" +
+                "- actual precision: \n" + actualPrecision.displayExact();
     }
 }
